@@ -1,0 +1,53 @@
+{{- if .Values.runMigration -}}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "sqlpad.fullname" . }}-migration
+  annotations:
+    helm.sh/hook: post-install,post-upgrade
+    helm.sh/hook-weight: "10"
+    helm.sh/hook-delete-policy: before-hook-creation
+  labels:
+    {{- include "sqlpad.labels" . | nindent 4 }}
+spec:
+  template:
+    metadata:
+      name: {{ include "sqlpad.fullname" . }}-migration
+      labels:
+        {{- include "sqlpad.labels" . | nindent 8 }}
+    spec:
+      restartPolicy: Never
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "sqlpad.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: migration
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          envFrom:
+            - secretRef:
+                name: {{ template "sqlpad.name" . }}-environment
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          args: ["node", "server.js", "--migrate"]
+      initContainers:
+        {{- include "sqlpad.initWaitMariaDB" . | indent 8 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+{{- end -}}
