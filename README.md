@@ -31,7 +31,7 @@ environmentOverride:
     SQLPAD_ADMIN_PASSWORD: 'sqlpad'
     SQLPAD_PASSPHRASE: '2719e693fcd80e8c220ebc5f721b665e'
 
-postgresql:
+mariadb:
   auth:
     password: ae880f3c4541a4aad456eeec2dc3f15e
     rootPassword: 4d3336a14b1031c9d1eefa3d7e4203d6
