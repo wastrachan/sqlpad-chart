@@ -1,7 +1,7 @@
 apiVersion: v2
 name: sqlpad
-version: 0.1.0
-appVersion: "6.11.0"
+version: 0.2.0
+appVersion: "7.0.4"
 description: A Helm chart for SQLPad
 type: application
 home: https://getsqlpad.com/
@@ -12,6 +12,6 @@ maintainers:
     email: winston.astrachan@gmail.com
 dependencies:
   - name: mariadb
-    version: "~10"
+    version: "~12"
     repository: "https://charts.bitnami.com/bitnami"
     condition: mariadb.enabled
