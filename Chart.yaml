@@ -12,6 +12,6 @@ maintainers:
     email: winston.astrachan@gmail.com
 dependencies:
   - name: mariadb
-    version: "~16"
+    version: "~17.0.0"
     repository: "https://charts.bitnami.com/bitnami"
     condition: mariadb.enabled
