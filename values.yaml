@@ -38,6 +38,19 @@ environmentOverride: {}
 # MariaDB bundled chart values (https://artifacthub.io/packages/helm/bitnami/mariadb)
 mariadb:
   enabled: true
+  # target legacy bitnami images until an alternative can be found
+  image:
+    registry: docker.io
+    repository: bitnamilegacy/mariadb
+  volumePermissions:
+    image:
+      registry: docker.io
+      repository: bitnamilegacy/mariadb
+  metrics:
+    image:
+      registry: docker.io
+      repository: bitnamilegacy/mysqld-exporter
+
   architecture: standalone
   auth:
     database: sqlpad
