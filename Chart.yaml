@@ -1,6 +1,6 @@
 apiVersion: v2
 name: sqlpad
-version: 0.3.0
+version: 0.4.0
 appVersion: "7.4.1"
 description: A Helm Chart for SQLPad
 type: application
@@ -9,7 +9,6 @@ sources:
   - https://github.com/sqlpad/sqlpad
 maintainers:
   - name: Winston Astrachan
-    email: winston.astrachan@gmail.com
 dependencies:
   - name: mariadb
     version: "~25.0.0"

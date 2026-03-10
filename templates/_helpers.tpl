@@ -71,6 +71,13 @@ Init container for mariadb-dependent pods
 {{- end }}
 
 {{/*
+Resolve the environment secret name
+*/}}
+{{- define "sqlpad.environmentSecretName" -}}
+{{- default (printf "%s-environment" (include "sqlpad.name" .)) .Values.existingSecretName }}
+{{- end }}
+
+{{/*
 Create a database connection string for the internal database
 */}}
 {{- define "sqlpad.mariadbConnection" -}}

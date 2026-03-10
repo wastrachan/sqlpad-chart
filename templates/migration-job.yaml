@@ -32,7 +32,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           envFrom:
             - secretRef:
-                name: {{ template "sqlpad.name" . }}-environment
+                name: {{ include "sqlpad.environmentSecretName" . }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           args: ["node", "server.js", "--migrate"]
