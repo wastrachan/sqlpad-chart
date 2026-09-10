@@ -11,6 +11,6 @@ maintainers:
   - name: Winston Astrachan
 dependencies:
   - name: mariadb
-    version: "~25.0.0"
+    version: "~27.3.0"
     repository: "https://charts.bitnami.com/bitnami"
     condition: mariadb.enabled
